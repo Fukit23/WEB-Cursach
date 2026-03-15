@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppFusion Store</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">AppFusion Store</div>
+    <nav>
+        <a href="#">Каталог</a>
+        <a href="#">Мої додатки</a>
+    </nav>
+</header>
+
+<main class="container" id="app-list"></main>
+
+<script>
+    const apps = [
+        { name: "PhotoEditor Pro", price: "499₴", icon: "" },
+        { name: "System Optimizer", price: "250₴", icon: "" }
+    ];
+
+    const list = document.getElementById('app-list');
+    
+    apps.forEach(app => {
+        list.innerHTML += `
+            <div class="app-card">
+                <img src="${app.icon}">
+                <h3>${app.name}</h3>
+                <div class="price-tag">${app.price}</div>
+                <div class="btn-group">
+                    <button class="btn-buy">Official</button>
+                    <button class="btn-alt">Repack</button>
+                </div>
+            </div>
+        `;
+    });
+</script>
+
+</body>
+</html>
