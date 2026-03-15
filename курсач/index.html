@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AppFusion Store</title>
+    <title>App Store - Каталог</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
 <header>
-    <div class="logo">AppFusion Store</div>
+    <div class="logo">AppFusion</div>
     <nav>
         <a href="#">Каталог</a>
-        <a href="#">Мої додатки</a>
+        <a href="#">Профіль</a>
     </nav>
 </header>
 
@@ -20,8 +20,8 @@
 
 <script>
     const apps = [
-        { name: "PhotoEditor Pro", price: "499₴", icon: "" },
-        { name: "System Optimizer", price: "250₴", icon: "" }
+        { id: 1, name: "PhotoEditor Pro", price: "499₴", icon: "" },
+        { id: 2, name: "System Optimizer", price: "250₴", icon: "" }
     ];
 
     const list = document.getElementById('app-list');
@@ -31,14 +31,32 @@
             <div class="app-card">
                 <img src="${app.icon}">
                 <h3>${app.name}</h3>
-                <div class="price-tag">${app.price}</div>
-                <div class="btn-group">
-                    <button class="btn-buy">Official</button>
-                    <button class="btn-alt">Repack</button>
+                <div class="price-tag" id="price-${app.id}">${app.price}</div>
+                
+                <div class="version-selector">
+                    <label>
+                        <input type="radio" name="ver-${app.id}" value="off" checked 
+                               onchange="updateUI(${app.id}, '${app.price}', 'official')">
+                        Official
+                    </label>
+                    <label>
+                        <input type="radio" name="ver-${app.id}" value="rep" 
+                               onchange="updateUI(${app.id}, '0₴', 'repack')">
+                        Repack
+                    </label>
                 </div>
+
+                <button class="btn-main" id="btn-${app.id}">Придбати Official</button>
             </div>
         `;
     });
+
+    function updateUI(id, price, type) {
+        document.getElementById(`price-${id}`).innerText = price;
+        const btn = document.getElementById(`btn-${id}`);
+        btn.innerText = type === 'official' ? 'Придбати Official' : 'Завантажити Repack';
+        btn.style.background = type === 'official' ? '#007bff' : '#e67e22';
+    }
 </script>
 
 </body>
